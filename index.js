@@ -1,14 +1,3 @@
-/*
-Some additional requirements for your application:
-
-- The bill value must be a positive float but your application must
-  handle user input that might be a negative or 0 dollar amount
-  (i.e. error handling).
-- The user input percentage for the tip must be a positive float.
-- The returned value must be a float rounded to two decimal points
-  (i.e. accurate dollars and cents).
-*/
-
 // Get process.stdin as the standard input object.
 const { stdin, stdout } = process;
 
@@ -25,14 +14,15 @@ function prompt(question) {
   });
 }
 
-async function main() {
+async function init() {
   try {
     const bill = await prompt('How much is the bill? ');
     const percent = await prompt('What percentage would you like to leave as tip? ');
-    const split = await prompt('Would you like to split the bill? (y/n) ');
+    const split = await prompt('Would you like to split the bill? [Y/n] ');
     let tip;
 
     switch (split) {
+      case ('Y'):
       case ('y'): {
         const party = await prompt('How many ways would you like to split the tip? ');
         tip = parseFloat((Math.abs(bill) * (Math.abs(percent) / 100)) / party);
@@ -47,7 +37,7 @@ async function main() {
         break;
       }
       default:
-        console.log('Please answer yes or no by inputting "y" or "n"');
+        console.log('Please answer yes or no by inputting "Y" or "n"');
         break;
     }
     stdin.pause();
@@ -57,4 +47,4 @@ async function main() {
   process.exit();
 }
 
-main();
+init();
