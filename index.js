@@ -30,6 +30,7 @@ async function init() {
         console.log(`\nTip per person: $${result}`);
         break;
       }
+      case ('N'):
       case ('n'): {
         tip = parseFloat(Math.abs(bill) * (Math.abs(percent) / 100));
         const result = (Math.round(tip * 100) / 100).toFixed(2);
